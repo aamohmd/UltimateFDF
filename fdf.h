@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:55 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/11 05:13:22 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:52:41 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,32 @@
 # define TEXT_COLOR			0xEAEAEA	
 # define NUMBER_COLOR		0xF3AF3D
 
+typedef struct s_vars
+{
+    
+} 				t_vars;
+
+typedef struct s_point
+{
+    int 	x;
+    int 	y;
+    int 	z;
+	int		color;
+} 				t_point;
+
 typedef struct s_map
 {
-	int	num_columns;
-	int	num_rows;
-	int	**content;
+	t_point	**points;
+	int		num_columns;
+	int		num_rows;
 }				t_map;
 
 typedef struct s_meta
 {
 	t_map	*map;
+	
 }				t_meta;
+
+int valid_point(char *value);
 
 #endif

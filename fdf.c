@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/12 05:38:50 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:01:32 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,51 +56,104 @@ void	terminate(char *s)
 	exit(1);
 }
 
-void	check_map(char *filename, t_map *map)
+int	get_next_line_fdf(int fd, char **line)
+{
+	*line = get_next_line(fd);
+	if (*line == NULL)
+		return (1);
+	return (0);
+}
+
+void	create_2d_array(t_map *map)
+{
+	int i;
+
+	i = 0;
+	map->points = (t_point **)malloc(map->num_rows * sizeof(t_point *));
+    while (i < map->num_rows)
+	{
+        map->points[i] = (t_point *)malloc(map->num_columns * sizeof(t_point));
+		i++;
+    }
+}
+
+int	map_dimensions(char *filename, t_map *map)
 {
     int		fd;
     char	*line;
-    char	**parts;
 	int		previous_num_columns;
+	char	**parts;
 
+	map->num_rows = 0;
     if (ft_file_name_error(filename) == 1)
         terminate("wrong file name");
     fd = open(filename, O_RDONLY);
     if (fd == -1)
-	{
         terminate("can't open file");
-	}
-	map->num_rows = 0;
-	map->num_columns = 0;
-	line = ft_strdup("");
-	if (line == NULL)
-        terminate("memory allocation failed");
-    while ((line = get_next_line(fd)) != NULL)
+    while (get_next_line_fdf(fd, &line) == 0)
     {
-        parts = ft_split(line, ' ');
+		parts = ft_split(line, ' ');
 		previous_num_columns = map->num_columns;
 		map->num_columns = ft_strslen(parts);
         if (previous_num_columns != map->num_columns && map->num_rows != 0)
-        {
-            free(line);
-            ft_strsdel(&parts);
-            terminate("inconsistent number of columns");
-        }
+			return (free(line), ft_strsdel(&parts), terminate("inconsistent number of columns"), 1);
 		free(line);
         ft_strsdel(&parts);
 		map->num_rows++;
     }
-    close(fd);
+	close(fd);
+	return (0);
+}
+void	load_points(t_map *map, char *filename)
+{
+	int		fd;
+	char	**parts;
+    char	*line;
+	int		i;
+	int		j;
+
+	i = 0;
+	fd = open(filename, O_RDONLY);
+	map_dimensions(filename, map);
+	create_2d_array(map);
+	while (i < map->num_rows)
+    {
+		j = 0;
+		line = get_next_line(fd);
+		parts = ft_split(line, ' ');
+		while (parts[j])
+		{
+			if (valid_point(parts[j]) == 1)
+				map->points[i][j].z = ft_atoi(parts[j]);
+			// else if (valid_point(parts[j]) == 0)
+			// 	terminate("invalid point");
+			j++;
+		}
+		free(line);
+        ft_strsdel(&parts);
+		i++;
+    }
 }
 
 int	main(int argc, char *argv[])
 {
 	t_map	map;
+	int		i;
+	int		j;
 
 	if (argc == 2)
 	{
-		check_map(argv[1], &map);
-		printf("%d\n", map.num_columns);
-		printf("%d\n", map.num_rows);
+		load_points(&map, argv[1]);
+		i = 0;
+		while (i < map.num_rows)
+		{
+			j = 0;
+			while (j < map.num_columns)
+			{
+				printf("%d ", map.points[i][j].z);
+				j++;
+			}
+			i++;
+		}
 	}
 }

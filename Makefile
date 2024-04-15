@@ -6,7 +6,7 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/09 22:47:22 by aamohame          #+#    #+#              #
-#    Updated: 2024/04/11 05:01:23 by aamohame         ###   ########.fr        #
+#    Updated: 2024/04/15 19:53:02 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
 YELLOW = \033[0;93m
 
-SRCS		 = fdf.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+SRCS		 = fdf.c fdf_utils.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 OBJS		 = $(SRCS:.c=.o)
 INCS		 = fdf.h 
 
