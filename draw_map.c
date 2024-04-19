@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:33:17 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/19 19:41:36 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:51:28 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,13 @@ void bresenham_algo(t_point * a, t_point * b, t_meta * meta)
 	meta->b_x += WINX / 2;
 	meta->a_y += WINY / 2;
 	meta->b_y += WINY / 2;
+	printf("(%d,%d) ", meta->a_x, meta->a_y);
+	printf("(%d,%d)\n", meta->b_x, meta->b_y);
 	// meta->x_next = (a->num_columns * meta->zoom) / 2;
 	// meta->y_next = (meta->map.num_rows * meta->zoom) / 2;
 	// dx = meta->b_x - meta->a_x;
 	// dy = meta->b_y - meta->a_y;
-	draw_line(meta);
+	// draw_line(meta);
 	// if (abs(dx) > abs(dy))
 	// 	slope_less_than_one(dx, dy, meta, a->color);
 	// else

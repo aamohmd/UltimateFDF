@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/19 19:39:47 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:50:17 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
     	meta.mlx = mlx_init();
     	if (!meta.mlx)
         	return (1);
-		meta.win = mlx_new_window(meta.mlx, WINX, WINY, "Dammmnnnn");
+		// meta.win = mlx_new_window(meta.mlx, WINX, WINY, "Dammmnnnn");
 		check_map(&(meta.map), argv[1]);
 		draw_map(&meta);
 		// i = 0;
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 		// 	printf("\n");
 		// 	i++;
 		// }
-		mlx_loop(meta.mlx);
-    	free(meta.mlx);
+		// mlx_loop(meta.mlx);
+    	// free(meta.mlx);
 	}
 }
