@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 08:05:55 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/15 19:52:41 by aamohame         ###   ########.fr       */
+/*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
+/*   Updated: 2024/04/19 14:44:15 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-
-# include "lib/UltimateGNL/get_next_line.h"
-# include "lib/UltimateLibft/libft.h"
-# include <stdio.h>
-# include <fcntl.h>
+#ifndef DEFINE_H
+# define DEFINE_H
 
 # define WINX 1920	
 # define WINY 1080
 
-# define DEFAULT_COLOR		JAFFA
-# define BOTTOM_COLOR		AZUL
-# define TOP_COLOR			BRICK_RED
-# define GROUND_COLOR		SAFFRON
-# define BACK_COLOR			0x151515
-# define MENU_COLOR			0x202020
-# define TEXT_COLOR			0xEAEAEA	
-# define NUMBER_COLOR		0xF3AF3D
-
-typedef struct s_vars
-{
-    
-} 				t_vars;
+# define DEFAULT_COLOR	0xFFFFFF
+# define RED			0xff0000
 
 typedef struct s_point
 {
@@ -41,6 +25,8 @@ typedef struct s_point
     int 	y;
     int 	z;
 	int		color;
+	int		flag;
+	int		num_columns;
 } 				t_point;
 
 typedef struct s_map
@@ -52,10 +38,18 @@ typedef struct s_map
 
 typedef struct s_meta
 {
-	t_map	*map;
-	
+	t_map	map;
+	void	*mlx;
+	void 	*win;
+	int		zoom;
+	int	a_x;
+	int	b_x;
+	int	a_y;
+	int	b_y;
+	int	a_z;
+	int	b_z;
+	int	x_next;
+	int	y_next;
 }				t_meta;
-
-int valid_point(char *value);
 
 #endif
