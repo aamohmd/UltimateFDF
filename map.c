@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:14 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/19 14:41:08 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:32:43 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,30 @@ int	map_dimensions(char *filename, t_map *map)
 	return (0);
 }
 
-void	load_points(t_map *map, char *str, int i, int j)
+void	load_points(t_map *map, char *str, int y, int x)
 {
 	char	*color;
 
 	if (valid_point(str) == 1)
 	{
-		map->points[i][j].flag = 0;
-		map->points[i][j].x = j;
-		map->points[i][j].y = i;
-		map->points[i][j].z = ft_atoi(str);
-		map->points[i][j].num_columns = map->num_columns;
+		map->points[y][x].flag = 0;
+		map->points[y][x].x = x;
+		map->points[y][x].y = y;
+		map->points[y][x].z = ft_atoi(str); 
+		map->points[y][x].num_columns = map->num_columns;
 		color = ft_strchr(str, ',');
 		if (color)
-			map->points[i][j].color = strtol(color + 1, NULL, 16);
+			map->points[y][x].color = strtol(color + 1, NULL, 16);
 		else
 		{
-			if (map->points[i][j].z == 0)
-				map->points[i][j].color = DEFAULT_COLOR;
+			if (map->points[y][x].z < 3)
+				map->points[y][x].color = BLEU;
+			else if (map->points[y][x].z >= 3 && map->points[y][x].z <= 13)
+				map->points[y][x].color = YELLOW;
+			else if (map->points[y][x].z > 13 && map->points[y][x].z <= 25)
+				map->points[y][x].color = ORANGE;
 			else
-				map->points[i][j].color = RED;
+				map->points[y][x].color = RED;
 		}
 	}
 	// else if (valid_point(str) == 0)
@@ -75,30 +79,30 @@ void	check_map(t_map *map, char *filename)
 	int		fd;
 	char	**parts;
     char	*line;
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
-	i = 0;
+	y = 0;
 	fd = open(filename, O_RDONLY);
 	map_dimensions(filename, map);
 	map->points = (t_point **)malloc(map->num_rows * sizeof(t_point *));
-	while (i < map->num_rows)
+	while (y < map->num_rows)
     {
-		j = 0;
+		x = 0;
 		line = get_next_line(fd);
 		parts = ft_split(line, ' ');
 		map->num_columns = ft_strslen(parts);
-		map->points[i] = (t_point *)malloc((map->num_columns + 1) * sizeof(t_point));
-		while (parts[j] != NULL)
+		map->points[y] = (t_point *)malloc((map->num_columns + 1) * sizeof(t_point));
+		while (parts[x] != NULL)
 		{
-			if (parts[j + 1] == NULL)
-				parts[j] = ft_strtrim(parts[j], "\n");
-			load_points(map, parts[j], i, j);
-			j++;
+			if (parts[x + 1] == NULL)
+				parts[x] = ft_strtrim(parts[x], "\n");
+			load_points(map, parts[x], y, x);
+			x++;
 		}
-		map->points[i][j].flag = 1;
+		map->points[y][x].flag = 1;
 		free(line);
         ft_strsdel(&parts);
-		i++;
+		y++;
     }
 }
