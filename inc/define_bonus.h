@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   define_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 16:08:05 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/24 17:59:07 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#ifndef DEFINE_BONUS_H
+# define DEFINE_BONUS_H
 
 # define WINX 1920	
 # define WINY 1080
@@ -21,6 +21,15 @@
 # define BLEU			0x00aaff
 # define YELLOW			0xf1c40f
 # define ORANGE			0xe67e22 
+
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
 
 typedef struct s_point
 {
@@ -42,19 +51,23 @@ typedef struct s_map
 typedef struct s_meta
 {
 	t_map	map;
+	t_img	data;
 	void	*mlx;
 	void 	*win;
 	int		zoom;
+	int		extra_zoom;
 	int		a_x;
 	int		b_x;
 	int		a_y;
 	int		b_y;
-	int		x_next;
-	int		y_next;
+	int		a_z;
+	int		b_z;
 	int		a_x_start;
 	int		a_y_start;
 	int		b_x_start;
 	int		b_y_start;
+	int		x_origin;
+	int		y_origin;
 	int		x_min;
 	int		x_max;
 	int		y_min;
@@ -65,6 +78,12 @@ typedef struct s_meta
 	float 	sy;
 	float 	err;
 	int		color;
+	int		x_translate;
+	int		y_translate;
+	float	gamma;
+	float	tetha;
+	float	alpha;
+	char	projection;	
 }				t_meta;
 
 #endif

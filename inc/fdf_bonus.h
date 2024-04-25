@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:58:46 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 13:10:27 by aamohame         ###   ########.fr       */
+/*   Created: 2024/04/05 08:05:55 by aamohame          #+#    #+#             */
+/*   Updated: 2024/04/21 19:03:51 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
-void	check_map(t_map *map, char *filename);
-int 	valid_point(char *value);
-int		ft_strslen(char	**parts);
-void	ft_strsdel(char ***strs);
-void	terminate(char *s);
-int		get_next_line_fdf(int fd, char **line);
-void	draw_map(t_meta *meta);
-void	gradient(t_meta *meta, int color_a, int color_b);
-void	convert_to_isometric(t_meta *meta);
+# include "../lib/UltimateGNL/get_next_line.h"
+# include "../lib/UltimateLibft/libft.h"
+# include "../lib/minilibx/mlx.h"
+# include "define_bonus.h"
+# include "map_bonus.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <math.h>
 
 #endif

@@ -6,11 +6,12 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/09 22:47:22 by aamohame          #+#    #+#              #
-#    Updated: 2024/04/18 11:58:12 by aamohame         ###   ########.fr        #
+#    Updated: 2024/04/23 18:06:11 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		 = fdf
+BONUS_NAME	 = fdf_bonus
 CC			 = gcc
 CFLAGS		 = -Wall -Werror -Wextra
 RM			 = rm -f
@@ -26,9 +27,12 @@ DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
 YELLOW = \033[0;93m
 
-SRCS		 = fdf.c fdf_utils.c map.c map_utils.c draw_map.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+SRCS		 = fdf.c fdf_utils.c map.c map_utils.c draw_map.c draw_map_utils.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+BONUS_SRCS	 = bonus/fdf_bonus.c bonus/fdf_utils_bonus.c bonus/map_bonus.c bonus/map_utils_bonus.c bonus/draw_map_bonus.c bonus/draw_map_utils_bonus.c \
+				bonus/fdf_movement_bonus.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 OBJS		 = $(SRCS:.c=.o)
-INCS		 = fdf.h 
+BONUS_OBJS	 = $(BONUS_SRCS:.c=.o)
+INCS		 = inc/fdf.h inc/fdf_bonus.h
 
 all: makelibs
 	@$(MAKE) -s $(NAME)
@@ -36,6 +40,13 @@ all: makelibs
 makelibs:
 	@$(MAKE) -s -C $(LIBFT_DIR)
 	@$(MAKE) -s -C $(MLX_DIR)
+
+bonus: makelibs
+	@$(MAKE) -s $(BONUS_NAME)
+
+$(BONUS_NAME) : $(BONUS_OBJS)
+	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lm $(BONUS_OBJS) -o $(BONUS_NAME) -framework OpenGL -framework AppKit
+	@echo "$(GREEN)✨ FDF bonus compiled!$(DEF_COLOR)"
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lm $(OBJS) -o $(NAME) -framework OpenGL -framework AppKit
@@ -48,12 +59,16 @@ $(NAME): $(OBJS)
 clean:
 	@$(RM) $(OBJS)
 	@echo "$(YELLOW) FDF Objects Deleted!"
+	@$(RM) $(BONUS_OBJS)
+	@echo "$(YELLOW) FDF Bonus Objects Deleted!"
 	@$(MAKE) clean -s -C $(LIBFT_DIR)
 	@echo "$(YELLOW) Libft Objects Deleted!"
 
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(YELLOW) FDF Name Deleted!"
+	@$(RM) $(BONUS_NAME)
+	@echo "$(YELLOW) FDF bonus Name Deleted!"
 	@$(MAKE) fclean -s -C $(LIBFT_DIR)
 	@echo "$(YELLOW) Libft Name Deleted!"
 	@$(MAKE) clean -s -C $(MLX_DIR)

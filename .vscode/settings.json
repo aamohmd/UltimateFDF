@@ -1,7 +1,7 @@
 {
 	"files.associations": {
-		"fcntl.h": "c",
-		"__locale": "c",
-		"algorithm": "c"
+		"fdf.h": "c",
+		"fdf_bonus.h": "c",
+		"__locale": "c"
 	}
 }
