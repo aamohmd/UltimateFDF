@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:14 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 19:28:45 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:18:09 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,21 @@ void	load_points(t_map *map, char *str, int y, int x)
 {
 	char	*color;
 
-	if (valid_point(str) == 1)
+	map->points[y][x].flag = 0;
+	map->points[y][x].x = x;
+	map->points[y][x].y = y;
+	map->points[y][x].z = ft_atoi(str); 
+	map->points[y][x].num_columns = map->num_columns;
+	color = ft_strchr(str, ',');
+	if (color)
+		map->points[y][x].color = strtol(color + 1, NULL, 16);
+	else
 	{
-		map->points[y][x].flag = 0;
-		map->points[y][x].x = x;
-		map->points[y][x].y = y;
-		map->points[y][x].z = ft_atoi(str); 
-		map->points[y][x].num_columns = map->num_columns;
-		color = ft_strchr(str, ',');
-		if (color)
-			map->points[y][x].color = strtol(color + 1, NULL, 16);
-		else
-		{
-			if (map->points[y][x].z < 3)
-				map->points[y][x].color = BLEU;
-			else if (map->points[y][x].z >= 3 && map->points[y][x].z <= 13)
-				map->points[y][x].color = YELLOW;
-			else if (map->points[y][x].z > 13 && map->points[y][x].z <= 25)
-				map->points[y][x].color = ORANGE;
-			else
-				map->points[y][x].color = RED;
-		}
+		if (map->points[y][x].z >= -5 && map->points[y][x].z <= 5)
+			map->points[y][x].color = DEFAULT_COLOR;
+		else if (map->points[y][x].z > 5 || map->points[y][x].z < -5)
+			map->points[y][x].color = 0x49DDE8;
 	}
-	// else if (valid_point(str) == 0)
-	// 	terminate("invalid point");
 }
 
 void	check_map(t_map *map, char *filename)

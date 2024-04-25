@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 16:08:05 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:11:33 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,19 @@ typedef struct s_map
 	int		num_rows;
 }				t_map;
 
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 typedef struct s_meta
 {
 	t_map	map;
+	t_img	data;
 	void	*mlx;
 	void 	*win;
 	int		zoom;

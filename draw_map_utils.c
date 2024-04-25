@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 13:07:35 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 19:44:37 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:07:46 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	gradient(t_meta *meta, int color_a, int color_b)
 	int		g;
 	int		b;
 
-	dx = abs(meta->b_x_start - meta->a_x_start);
-	dy = abs(meta->b_y_start - meta->a_y_start);
+	dx = (int)fabsf((float)meta->b_x_start - (float)meta->a_x_start);
+	dy = (int)fabsf((float)meta->b_y_start - (float)meta->a_y_start);
 	if (dx >= dy)
 		fraction_result = fraction(meta, 'x');
 	else

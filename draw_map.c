@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:33:17 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 19:57:03 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:11:02 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	assign_map_limits(t_meta *meta)
 
 void	put_pixel(int x, int y, t_meta *meta, int color)
 {
-	mlx_pixel_put(meta->mlx, meta->win, x, y, color);
+	char	*dst;
+
+    dst = meta->data.addr + (y * meta->data.line_length + x * (meta->data.bits_per_pixel / 8));
+    *(unsigned int*)dst = color;
 }
 
 void	draw_line(t_meta *meta, int color_a, int color_b)
@@ -53,7 +56,7 @@ void	draw_line(t_meta *meta, int color_a, int color_b)
 	while (1)
 	{
 		gradient(meta, color_a, color_b);
-		mlx_pixel_put(meta->mlx, meta->win, meta->a_x + ((WINX / 2) - meta->x_min) - (meta->x_max - meta->x_min) / 2, meta->a_y + ((WINY / 2) - meta->y_min) - (meta->y_max - meta->y_min) / 2, meta->color);
+		put_pixel(meta->a_x + ((WINX / 2) - meta->x_min) - (meta->x_max - meta->x_min) / 2, meta->a_y + ((WINY / 2) - meta->y_min) - (meta->y_max - meta->y_min) / 2, meta, meta->color);
 		if (meta->a_x == meta->b_x && meta->a_y == meta->b_y)
 			break ;
 		e2 = meta->err;
@@ -80,8 +83,8 @@ void	bresenham_algo(t_point *a, t_point *b, t_meta *meta)
 	meta->a_y_start = a->y;
 	meta->b_x_start = b->x;
 	meta->b_y_start = b->y;
-	meta->dx = abs(meta->b_x - meta->a_x);
-	meta->dy = abs(meta->b_y - meta->a_y);
+	meta->dx = (int)fabsf((float)meta->b_x - (float)meta->a_x);
+	meta->dy = (int)fabsf((float)meta->b_y - (float)meta->a_y);
 	if (meta->a_x < meta->b_x)
 		meta->sx = 1;
 	else
@@ -101,21 +104,29 @@ void	get_perfect_zoom(t_meta *meta)
 {
 	int	surface;
 
-	surface = meta->map.num_rows * meta->map.points[0][0].num_columns;
-	if (surface == 209)
-		meta->zoom = 40;
-	else if (surface == 110 || surface == 100)
+	surface = meta->map.num_rows * meta->map.points[0][0].num_columns;    
+	if (surface == 209 || surface == 189)
+		meta->zoom = 20;
+	else if (surface == 9)
+		meta->zoom = 60;
+	else if (surface >= 80 && surface < 189)
 		meta->zoom = 25;
-	else if (surface == 400)
+	else if (surface >= 400 && surface < 1000)
 		meta->zoom = 15;
-	else if (surface == 10100)
-		meta->zoom = 5;
-	else if (surface == 250000)
+	else if (surface >= 25000 && surface < 40000)
+		meta->zoom = 3;
+	else if (surface == 250000 && surface == 129213)
 		meta->zoom = 2;
-	else if (surface == 2550)
-		meta->zoom = 10;
-	else if (surface == 23200)
+	else if (surface >= 40000 && surface < 100000)
 		meta->zoom = 4;
+	else if (surface == 70950)
+		meta->zoom = 1;
+	else if (surface >= 2000 && surface < 4000)
+		meta->zoom = 10;
+	else if (surface >= 10000 && surface < 25000)
+		meta->zoom = 4;
+	else
+		meta->zoom = 2;
 }
 
 void	draw_map(t_meta *meta)

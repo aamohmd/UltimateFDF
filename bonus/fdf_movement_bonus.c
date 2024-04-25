@@ -6,19 +6,26 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:00:47 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/24 18:04:11 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:32:12 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf_bonus.h"
 
-int	key_press(int key, t_meta *meta)
+void	rotate_translate_zoom(t_meta *meta, int key)
 {
-    if (key == 53)
-    {
-        mlx_destroy_window(meta->mlx, meta->win);
-        exit(0);
-    }
+	if (key == 91)
+		meta->gamma += 0.1;
+	else if (key == 87)
+		meta->gamma -= 0.1;
+	else if (key == 88)
+		meta->tetha += 0.1;
+	else if (key == 86)
+		meta->tetha -= 0.1;
+	else if (key == 89)
+		meta->alpha += 0.1;
+	else if (key == 92)
+		meta->alpha -= 0.1;
 	else if (key == 13)
 		meta->y_translate -= 15;
 	else if (key == 0)
@@ -31,19 +38,16 @@ int	key_press(int key, t_meta *meta)
 		meta->extra_zoom += meta->zoom / 10;
 	else if (key == 78)
 		meta->extra_zoom -= meta->zoom / 10;
-	else if (key == 91)
-		meta->gamma += 0.1;
-	else if (key == 84)
-		meta->gamma -= 0.1;
-	else if (key == 86)
-		meta->tetha += 0.1;
-	else if (key == 88)
-		meta->tetha -= 0.1;
-	else if (key == 89)
-		meta->alpha += 0.1;
-	else if (key == 92)
-		meta->alpha -= 0.1;
-	else if (key == 126)
+}
+
+int	key_press(int key, t_meta *meta)
+{
+    if (key == 53)
+    {
+        mlx_destroy_window(meta->mlx, meta->win);
+        exit(0);
+    }
+	else if (key == 126 || key == 125)
 	{
 		meta->x_translate = 0;
 		meta->y_translate = 0;
@@ -51,18 +55,13 @@ int	key_press(int key, t_meta *meta)
 		meta->gamma = 0;
 		meta->tetha = 0;
 		meta->alpha = 0;
-		meta->projection = 'i';
+		if (key == 126)
+			meta->projection = 'p';
+		else
+			meta->projection = 'i';
 	}
-	else if (key == 125)
-	{
-		meta->x_translate = 0;
-		meta->y_translate = 0;
-		meta->extra_zoom = 0;
-		meta->gamma = 0;
-		meta->tetha = 0;
-		meta->alpha = 0;
-		meta->projection = 't';
-	}
+
+	rotate_translate_zoom(meta, key);
 	mlx_clear_window(meta->mlx, meta->win);
 	draw_map(meta);
     return (0);

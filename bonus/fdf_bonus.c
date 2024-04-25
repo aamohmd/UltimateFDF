@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/24 19:22:31 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:14:06 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	main(int argc, char *argv[])
     	if (!meta.mlx)
         	return (1);
 		meta.win = mlx_new_window(meta.mlx, WINX, WINY, "UltimateFDF");
-		img = mlx_xpm_file_to_image(meta.mlx, "maps/bitmap.xpm", &img_width, &img_height);
-        mlx_put_image_to_window(meta.mlx, meta.win, img, 0, 0);
 		check_map(&(meta.map), argv[1]);
 		get_perfect_zoom(&meta);
+		draw_map(&meta);
+		img = mlx_xpm_file_to_image(meta.mlx, "maps/start.xpm", &img_width, &img_height);
+        mlx_put_image_to_window(meta.mlx, meta.win, img, 0, 0);
 		mlx_key_hook(meta.win, key_press, &meta);
 		mlx_hook(meta.win, 17, 0, close_window, &meta);
 		mlx_loop(meta.mlx);
