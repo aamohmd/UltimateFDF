@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:33:17 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 14:20:22 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:41:13 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void	draw_map(t_meta *meta)
 	img_width = WINX;
 	img_height = WINY;
 	meta->data.img = mlx_new_image(meta->mlx, WINX, WINY);
-	meta->data.img = mlx_xpm_file_to_image(meta->mlx, "maps/background.xpm", &img_width, &img_height);
+	meta->data.img = mlx_xpm_file_to_image(meta->mlx, "bonus/background.xpm", &img_width, &img_height);
     meta->data.addr = mlx_get_data_addr(meta->data.img, &meta->data.bits_per_pixel, &meta->data.line_length, &meta->data.endian);
 	y = 0;
 	while (y < meta->map.num_rows)

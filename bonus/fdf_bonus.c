@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 14:14:06 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:41:19 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[])
 		check_map(&(meta.map), argv[1]);
 		get_perfect_zoom(&meta);
 		draw_map(&meta);
-		img = mlx_xpm_file_to_image(meta.mlx, "maps/start.xpm", &img_width, &img_height);
+		img = mlx_xpm_file_to_image(meta.mlx, "bonus/start.xpm", &img_width, &img_height);
         mlx_put_image_to_window(meta.mlx, meta.win, img, 0, 0);
 		mlx_key_hook(meta.win, key_press, &meta);
 		mlx_hook(meta.win, 17, 0, close_window, &meta);
