@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:00:47 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 12:32:12 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/27 10:46:27 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ void	rotate_translate_zoom(t_meta *meta, int key)
 	else if (key == 2)
 		meta->x_translate += 15;
 	else if (key == 69)
-		meta->extra_zoom += meta->zoom / 10;
+		meta->extra_zoom += 1;
 	else if (key == 78)
-		meta->extra_zoom -= meta->zoom / 10;
+		meta->extra_zoom -= 1;
 }
 
 int	key_press(int key, t_meta *meta)
 {
-    if (key == 53)
-    {
-        mlx_destroy_window(meta->mlx, meta->win);
-        exit(0);
-    }
+	if (key == 53)
+	{
+		mlx_destroy_window(meta->mlx, meta->win);
+		exit(0);
+	}
 	else if (key == 126 || key == 125)
 	{
 		meta->x_translate = 0;
@@ -55,21 +55,22 @@ int	key_press(int key, t_meta *meta)
 		meta->gamma = 0;
 		meta->tetha = 0;
 		meta->alpha = 0;
-		if (key == 126)
-			meta->projection = 'p';
-		else
-			meta->projection = 'i';
+		if (key == 125)
+		{
+			meta->gamma = M_PI / 6;
+			meta->tetha = 0;
+			meta->alpha = M_PI / 6;
+		}
 	}
-
 	rotate_translate_zoom(meta, key);
 	mlx_clear_window(meta->mlx, meta->win);
 	draw_map(meta);
-    return (0);
+	return (0);
 }
 
 void	rotate_z(t_meta *meta)
 {
-	int	tmp;
+	double	tmp;
 
 	tmp = meta->a_x;
 	meta->a_x = tmp * cos(meta->gamma) - meta->a_y * sin(meta->gamma);
@@ -81,7 +82,7 @@ void	rotate_z(t_meta *meta)
 
 void	rotate_y(t_meta *meta)
 {
-	int	tmp;
+	double	tmp;
 
 	tmp = meta->a_x;
 	meta->a_x = tmp * cos(meta->tetha) + meta->a_z * sin(meta->tetha);
@@ -93,7 +94,7 @@ void	rotate_y(t_meta *meta)
 
 void	rotate_x(t_meta *meta)
 {
-	int tmp;
+	double	tmp;
 
 	tmp = meta->a_y;
 	meta->a_y = tmp * cos(meta->alpha) - meta->a_z * sin(meta->alpha);

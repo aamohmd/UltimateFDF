@@ -6,7 +6,7 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/09 22:47:22 by aamohame          #+#    #+#              #
-#    Updated: 2024/04/23 18:06:11 by aamohame         ###   ########.fr        #
+#    Updated: 2024/04/27 10:11:00 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,9 @@ DEF_COLOR = \033[0;39m
 GREEN = \033[0;92m
 YELLOW = \033[0;93m
 
-SRCS		 = fdf.c fdf_utils.c map.c map_utils.c draw_map.c draw_map_utils.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+SRCS		 = fdf.c fdf_utils.c map.c map_utils.c draw_map.c draw_map_utils.c bresenham.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 BONUS_SRCS	 = bonus/fdf_bonus.c bonus/fdf_utils_bonus.c bonus/map_bonus.c bonus/map_utils_bonus.c bonus/draw_map_bonus.c bonus/draw_map_utils_bonus.c \
-				bonus/fdf_movement_bonus.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+				bonus/fdf_movement_bonus.c bonus/bresenham_bonus.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 OBJS		 = $(SRCS:.c=.o)
 BONUS_OBJS	 = $(BONUS_SRCS:.c=.o)
 INCS		 = inc/fdf.h inc/fdf_bonus.h

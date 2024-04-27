@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:58:46 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/24 18:00:33 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:47:18 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ int		key_press(int key, t_meta *meta);
 void	rotate_z(t_meta *meta);
 void	rotate_y(t_meta *meta);
 void	rotate_x(t_meta *meta);
+void	draw_line(t_meta *meta, int color_a, int color_b);
+void	bre(t_point *a, t_point *b, t_meta *meta);
+void	isometric(t_point *a, t_point *b, t_meta *meta);
 
 #endif

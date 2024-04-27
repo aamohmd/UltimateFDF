@@ -6,31 +6,31 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:55:43 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/21 19:28:47 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:52:16 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf_bonus.h"
 
-int valid_point(char *value)
+int	valid_point(char *value)
 {
 	int	i;
 
 	i = 0;
-    if (value == NULL)
-        return (0);
-    if (value[i] == '-' || value[i] == '+')
-        i++;
-    while (value[i] && value[i] != ',')
+	if (value == NULL)
+		return (0);
+	if (value[i] == '-' || value[i] == '+')
+		i++;
+	while (value[i] && value[i] != ',')
 	{
-        if (ft_isdigit(value[i]) == 0)
-            return (0);
-        i++;
-    }
-    return (1);
+		if (ft_isdigit(value[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-int	ft_strslen(char	**parts)
+int	ft_strslen(char **parts)
 {
 	int	i;
 
@@ -42,18 +42,18 @@ int	ft_strslen(char	**parts)
 
 void	ft_strsdel(char ***strs)
 {
-    int	i;
+	int	i;
 
-    if (!strs || !*strs)
-        return ;
-    i = 0;
-    while ((*strs)[i])
-    {
-        free((*strs)[i]);
-        i++;
-    }
-    free(*strs);
-    *strs = NULL;
+	if (!strs || !*strs)
+		return ;
+	i = 0;
+	while ((*strs)[i])
+	{
+		free((*strs)[i]);
+		i++;
+	}
+	free(*strs);
+	*strs = NULL;
 }
 
 void	terminate(char *s)

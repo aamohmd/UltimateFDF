@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 14:11:33 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/27 10:19:21 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct s_map
 	t_point	**points;
 	int		num_columns;
 	int		num_rows;
+	int		fd;
+	char	**parts;
+	char	*line;
+	int		x;
+	int		y;
 }				t_map;
 
 typedef struct	s_img
@@ -48,10 +53,27 @@ typedef struct	s_img
 	int		endian;
 }				t_img;
 
+typedef struct s_gradient
+{
+	int		dx;
+	int		dy;
+	float	fraction_result;
+	int		r_a;
+	int		g_a;
+	int		b_a;
+	int		r_b;
+	int		g_b;
+	int		b_b;
+	int		r;
+	int		g;
+	int		b;
+}				t_gradient;
+
 typedef struct s_meta
 {
 	t_map	map;
 	t_img	data;
+	t_gradient	grad;
 	void	*mlx;
 	void 	*win;
 	int		zoom;

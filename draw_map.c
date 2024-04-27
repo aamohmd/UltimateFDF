@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:33:17 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 14:11:02 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/27 10:09:48 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,38 +41,6 @@ void	assign_map_limits(t_meta *meta)
 	}
 }
 
-void	put_pixel(int x, int y, t_meta *meta, int color)
-{
-	char	*dst;
-
-    dst = meta->data.addr + (y * meta->data.line_length + x * (meta->data.bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
-}
-
-void	draw_line(t_meta *meta, int color_a, int color_b)
-{
-	float	e2;
-
-	while (1)
-	{
-		gradient(meta, color_a, color_b);
-		put_pixel(meta->a_x + ((WINX / 2) - meta->x_min) - (meta->x_max - meta->x_min) / 2, meta->a_y + ((WINY / 2) - meta->y_min) - (meta->y_max - meta->y_min) / 2, meta, meta->color);
-		if (meta->a_x == meta->b_x && meta->a_y == meta->b_y)
-			break ;
-		e2 = meta->err;
-		if (e2 > -meta->dx)
-		{
-			meta->err -= meta->dy;
-			meta->a_x += meta->sx;
-		}
-		if (e2 < meta->dy)
-		{
-			meta->err += meta->dx;
-			meta->a_y += meta->sy;
-		}
-	}
-}
-
 void	bresenham_algo(t_point *a, t_point *b, t_meta *meta)
 {
 	meta->a_x = a->x;
@@ -104,7 +72,7 @@ void	get_perfect_zoom(t_meta *meta)
 {
 	int	surface;
 
-	surface = meta->map.num_rows * meta->map.points[0][0].num_columns;    
+	surface = meta->map.num_rows * meta->map.points[0][0].num_columns;
 	if (surface == 209 || surface == 189)
 		meta->zoom = 20;
 	else if (surface == 9)
@@ -129,11 +97,25 @@ void	get_perfect_zoom(t_meta *meta)
 		meta->zoom = 2;
 }
 
+void	initial_image(t_meta *meta)
+{
+	int	img_width;
+	int	img_height;
+
+	img_width = WINX;
+	img_height = WINY;
+	meta->data.img = mlx_new_image(meta->mlx, WINX, WINY);
+	meta->data.addr = mlx_get_data_addr(meta->data.img,
+			&meta->data.bits_per_pixel, &meta->data.line_length,
+			&meta->data.endian);
+}
+
 void	draw_map(t_meta *meta)
 {
 	int	x;
 	int	y;
 
+	initial_image(meta);
 	get_perfect_zoom(meta);
 	convert_to_isometric(meta);
 	assign_map_limits(meta);
@@ -153,4 +135,5 @@ void	draw_map(t_meta *meta)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(meta->mlx, meta->win, meta->data.img, 0, 0);
 }
