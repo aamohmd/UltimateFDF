@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/03 11:55:34 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:02:17 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,16 @@
 # define WINX 1920
 # define WINY 1080
 
-# define DEFAULT_COLOR	0xFFFFFF
-# define RED			0xe84309
-# define BLEU			0x00aaff
-# define YELLOW			0xf1c40f
+# define BLEU			0x3498db
+# define YELLOW			0xFAD5A5
 # define ORANGE			0xe67e22 
+# define GREEN			0x2ecc71
 
-# define GROUND_COLOR	0x2ecc71
-# define BOTTOM_COLOR	0x3498db
-# define TOP_COLOR		0xe74c3c
+# define GROUND_COLOR	GREEN
+# define BOTTOM_COLOR	BLEU
+# define TOP_COLOR		ORANGE
 # define DEFAULT		0xFFFFFF
-# define DEFAULT_COLOR	0xFFFFFF
+# define DEFAULT_COLOR	YELLOW
 
 typedef struct	s_img
 {
