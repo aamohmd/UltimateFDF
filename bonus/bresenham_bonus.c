@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 16:10:55 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 20:55:03 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:45:29 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	rotate(t_meta *meta)
 	rotate_z(meta);
 	rotate_y(meta);
 	rotate_x(meta);
-	meta->a_x += (WINX / 2) + meta->x_translate + 235;
+	meta->a_x += (WINX / 2) + meta->x_translate;
 	meta->a_y += (WINY / 2) + meta->y_translate;
-	meta->b_x += (WINX / 2) + meta->x_translate + 235;
+	meta->b_x += (WINX / 2) + meta->x_translate;
 	meta->b_y += (WINY / 2) + meta->y_translate;
 }
 

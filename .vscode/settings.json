@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"fdf.h": "c",
-		"fdf_bonus.h": "c",
-		"__locale": "c",
-		"algorithm": "c"
-	}
-}

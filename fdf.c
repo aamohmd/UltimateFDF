@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:44:19 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:13:34 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		(void)argv;
 		meta.mlx = mlx_init();
 		if (!meta.mlx)
 			return (1);

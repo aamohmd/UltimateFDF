@@ -6,7 +6,7 @@
 #    By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/09 22:47:22 by aamohame          #+#    #+#              #
-#    Updated: 2024/04/27 10:11:00 by aamohame         ###   ########.fr        #
+#    Updated: 2024/05/03 11:54:51 by aamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,30 +29,31 @@ YELLOW = \033[0;93m
 
 SRCS		 = fdf.c fdf_utils.c map.c map_utils.c draw_map.c draw_map_utils.c bresenham.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 BONUS_SRCS	 = bonus/fdf_bonus.c bonus/fdf_utils_bonus.c bonus/map_bonus.c bonus/map_utils_bonus.c bonus/draw_map_bonus.c bonus/draw_map_utils_bonus.c \
-				bonus/fdf_movement_bonus.c bonus/bresenham_bonus.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
+				bonus/fdf_movement_bonus.c bonus/bresenham_bonus.c bonus/crazy_bonus.c bonus/rotate_bonus.c lib/UltimateGNL/get_next_line.c lib/UltimateGNL/get_next_line_utils.c
 OBJS		 = $(SRCS:.c=.o)
 BONUS_OBJS	 = $(BONUS_SRCS:.c=.o)
-INCS		 = inc/fdf.h inc/fdf_bonus.h
+INCS		 = inc/fdf.h inc/define.h inc/map.h
+INCS_BONUS	 = inc/fdf_bonus.h inc/define_bonus.h inc/map_bonus.h
 
 all: makelibs
 	@$(MAKE) -s $(NAME)
+	@$(MAKE) -s $(MLX_DIR)
 
 makelibs:
 	@$(MAKE) -s -C $(LIBFT_DIR)
-	@$(MAKE) -s -C $(MLX_DIR)
 
 bonus: makelibs
 	@$(MAKE) -s $(BONUS_NAME)
 
-$(BONUS_NAME) : $(BONUS_OBJS)
+$(BONUS_NAME) : $(BONUS_OBJS) $(INCS_BONUS)
 	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lm $(BONUS_OBJS) -o $(BONUS_NAME) -framework OpenGL -framework AppKit
 	@echo "$(GREEN)✨ FDF bonus compiled!$(DEF_COLOR)"
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(INCS)
 	@$(CC) $(CFLAGS) -L $(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lm $(OBJS) -o $(NAME) -framework OpenGL -framework AppKit
 	@echo "$(GREEN)✨ FDF compiled!$(DEF_COLOR)"
 
-%.o: %.c $(INCS)
+%.o: %.c
 	@echo "🍩 $(YELLOW)Compiling: $< $(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 

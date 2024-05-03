@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 10:10:11 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:40:11 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/29 11:37:48 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	draw_line(t_meta *meta, int color_a, int color_b)
 	while (1)
 	{
 		gradient(meta, color_a, color_b);
-		if (meta->a_x >= 0 && meta->a_x < WINX && meta->a_y >= 0 && meta->a_y < WINY)
+		if (meta->a_x >= 0 && meta->a_x < WINX && meta->a_y >= 0
+			&& meta->a_y < WINY)
 			put_pixel(meta->a_x, meta->a_y, meta, meta->color);
 		if (meta->a_x == meta->b_x && meta->a_y == meta->b_y)
 			break ;

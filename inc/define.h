@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:19:21 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:55:10 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define RED			0xe84309
 # define BLEU			0x00aaff
 # define YELLOW			0xf1c40f
-# define ORANGE			0xe67e22 
+# define ORANGE			0xe67e22
 
 typedef struct s_point
 {

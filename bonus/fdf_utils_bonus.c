@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:29:34 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/25 15:49:10 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:44:34 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_perfect_zoom(t_meta *meta)
 	surface = meta->map.num_rows * meta->map.points[0][0].num_columns;
 	if (surface == 209 || surface == 189)
 		meta->zoom = 20;
-	else if (surface == 9)
+	else if (surface == 9 || surface == 16)
 		meta->zoom = 60;
 	else if (surface >= 80 && surface < 189)
 		meta->zoom = 25;

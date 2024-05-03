@@ -6,14 +6,14 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:59:45 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:28:07 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:55:34 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_BONUS_H
 # define DEFINE_BONUS_H
 
-# define WINX 1920	
+# define WINX 1920
 # define WINY 1080
 
 # define DEFAULT_COLOR	0xFFFFFF
@@ -21,6 +21,12 @@
 # define BLEU			0x00aaff
 # define YELLOW			0xf1c40f
 # define ORANGE			0xe67e22 
+
+# define GROUND_COLOR	0x2ecc71
+# define BOTTOM_COLOR	0x3498db
+# define TOP_COLOR		0xe74c3c
+# define DEFAULT		0xFFFFFF
+# define DEFAULT_COLOR	0xFFFFFF
 
 typedef struct	s_img
 {
@@ -51,6 +57,8 @@ typedef struct s_map
 	char	*line;
 	int		x;
 	int		y;
+	int		zmin;
+	int		zmax;
 }				t_map;
 
 typedef struct s_gradient
@@ -67,6 +75,9 @@ typedef struct s_gradient
 	int		r;
 	int		g;
 	int		b;
+	int		color;
+	int		colora;
+	int		colorb;
 }				t_gradient;
 
 typedef struct s_meta
@@ -107,6 +118,12 @@ typedef struct s_meta
 	float	gamma;
 	float	tetha;
 	float	alpha;
+	int		mode;
+	int		is_looping;
+	char	color_mode;
+	int		img_width;
+	int		img_height;
+	
 }				t_meta;
 
 #endif

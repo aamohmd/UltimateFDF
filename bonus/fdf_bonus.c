@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:46:42 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/02 15:43:17 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ void	initial(t_meta *meta)
 	meta->x_translate = 0;
 	meta->y_translate = 0;
 	meta->extra_zoom = 0;
-	meta->gamma = M_PI / 6;
+	meta->gamma = atan(1);
 	meta->tetha = 0;
-	meta->alpha = M_PI / 6;
+	meta->alpha = atan(sqrt(2));
 	meta->extra_zoom = 0;
+	meta->color_mode = 'd';
+	meta->map.zmin = 0;
+	meta->map.zmax = 0;
+	meta->mode = 0;
 }
 
 int	main(int argc, char *argv[])

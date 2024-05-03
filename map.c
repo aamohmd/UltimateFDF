@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:14 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 11:06:53 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:13:51 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,42 @@ void	load_points(t_map *map, char *str, int y, int x)
 	}
 }
 
+void	read_map(t_map *map)
+{
+	int	prev_num_columns;
+
+	prev_num_columns = map->num_columns;
+	map->x = 0;
+	map->line = get_next_line(map->fd);
+	map->parts = ft_split(map->line, ' ');
+	map->num_columns = ft_strslen(map->parts);
+	if (prev_num_columns != map->num_columns && map->y != 0)
+		terminate("found wrong line length. Exiting.");
+	map->points[map->y] = (t_point *)malloc((map->num_columns + 1)
+			* sizeof(t_point));
+	while (map->parts[map->x] != NULL)
+	{
+		if (map->parts[map->x + 1] == NULL)
+			map->parts[map->x] = ft_strtrim(map->parts[map->x], "\n");
+		load_points(map, map->parts[map->x], map->y, map->x);
+		map->x++;
+	}
+	map->points[map->y][map->x].flag = 1;
+}
+
 void	check_map(t_map *map, char *filename)
 {
 	map->y = 0;
 	map->fd = open(filename, O_RDONLY);
 	map_dimensions(filename, map);
+	if (map->num_rows == 0)
+		terminate("empty file");
 	map->points = (t_point **)malloc(map->num_rows * sizeof(t_point *));
 	while (map->y < map->num_rows)
 	{
-		map->x = 0;
-		map->line = get_next_line(map->fd);
-		map->parts = ft_split(map->line, ' ');
-		map->num_columns = ft_strslen(map->parts);
-		map->points[map->y] = (t_point *)malloc((map->num_columns + 1)
-				* sizeof(t_point));
-		while (map->parts[map->x] != NULL)
-		{
-			if (map->parts[map->x + 1] == NULL)
-				map->parts[map->x] = ft_strtrim(map->parts[map->x], "\n");
-			load_points(map, map->parts[map->x], map->y, map->x);
-			map->x++;
-		}
-		map->points[map->y][map->x].flag = 1;
+		read_map(map);
+		if (ft_strncmp(map->line, "\n", 1) == 0 && map->y == 0)
+			terminate("empty file");
 		free(map->line);
 		ft_strsdel(&map->parts);
 		map->y++;

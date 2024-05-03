@@ -6,13 +6,13 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:00:47 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:46:27 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:12:19 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf_bonus.h"
 
-void	rotate_translate_zoom(t_meta *meta, int key)
+void	rotate_translate(t_meta *meta, int key)
 {
 	if (key == 91)
 		meta->gamma += 0.1;
@@ -34,10 +34,51 @@ void	rotate_translate_zoom(t_meta *meta, int key)
 		meta->y_translate += 15;
 	else if (key == 2)
 		meta->x_translate += 15;
-	else if (key == 69)
+}
+
+void	zoom(t_meta *meta, int key)
+{
+	if (meta->zoom + meta->extra_zoom == 1 && key == 78)
+		return ;
+	if (key == 69)
 		meta->extra_zoom += 1;
 	else if (key == 78)
 		meta->extra_zoom -= 1;
+	else if (key == 49)
+	{
+		if (meta->mode == 2)
+			meta->mode = 0;
+		else if (meta->mode < 2)
+			meta->mode++;
+	}
+}
+
+void	projections(t_meta *meta, int key)
+{
+	if (key == 126 || key == 125 || key == 123 || key == 124)
+	{
+		meta->tetha = 0;
+		if (key == 126)
+		{
+			meta->gamma = 0;
+			meta->alpha = 0;
+		}
+		else if (key == 125)
+		{
+			meta->gamma = atan(1);
+			meta->alpha = atan(sqrt(2));
+		}
+		else if (key == 123)
+		{
+			meta->gamma = M_PI / 2;
+			meta->alpha = M_PI / 2;
+		}
+		else if (key == 124)
+		{
+			meta->alpha = M_PI / 2;
+			meta->gamma = 0;
+		}
+	}
 }
 
 int	key_press(int key, t_meta *meta)
@@ -47,59 +88,12 @@ int	key_press(int key, t_meta *meta)
 		mlx_destroy_window(meta->mlx, meta->win);
 		exit(0);
 	}
-	else if (key == 126 || key == 125)
-	{
-		meta->x_translate = 0;
-		meta->y_translate = 0;
-		meta->extra_zoom = 0;
-		meta->gamma = 0;
-		meta->tetha = 0;
-		meta->alpha = 0;
-		if (key == 125)
-		{
-			meta->gamma = M_PI / 6;
-			meta->tetha = 0;
-			meta->alpha = M_PI / 6;
-		}
-	}
-	rotate_translate_zoom(meta, key);
+	projections(meta, key);
+	crazy_mode(meta, key);
+	rotate_translate(meta, key);
+	zoom(meta, key);
+	mlx_destroy_image(meta->mlx, meta->data.img);
 	mlx_clear_window(meta->mlx, meta->win);
 	draw_map(meta);
 	return (0);
-}
-
-void	rotate_z(t_meta *meta)
-{
-	double	tmp;
-
-	tmp = meta->a_x;
-	meta->a_x = tmp * cos(meta->gamma) - meta->a_y * sin(meta->gamma);
-	meta->a_y = tmp * sin(meta->gamma) + meta->a_y * cos(meta->gamma);
-	tmp = meta->b_x;
-	meta->b_x = tmp * cos(meta->gamma) - meta->b_y * sin(meta->gamma);
-	meta->b_y = tmp * sin(meta->gamma) + meta->b_y * cos(meta->gamma);
-}
-
-void	rotate_y(t_meta *meta)
-{
-	double	tmp;
-
-	tmp = meta->a_x;
-	meta->a_x = tmp * cos(meta->tetha) + meta->a_z * sin(meta->tetha);
-	meta->a_z = meta->a_z * cos(meta->tetha) - tmp * sin(meta->tetha);
-	tmp = meta->b_x;
-	meta->b_x = tmp * cos(meta->tetha) + meta->b_z * sin(meta->tetha);
-	meta->b_z = meta->b_z * cos(meta->tetha) - tmp * sin(meta->tetha);
-}
-
-void	rotate_x(t_meta *meta)
-{
-	double	tmp;
-
-	tmp = meta->a_y;
-	meta->a_y = tmp * cos(meta->alpha) - meta->a_z * sin(meta->alpha);
-	meta->a_z = tmp * sin(meta->alpha) + meta->a_z * cos(meta->alpha);
-	tmp = meta->b_y;
-	meta->b_y = tmp * cos(meta->alpha) - meta->b_z * sin(meta->alpha);
-	meta->b_z = tmp * sin(meta->alpha) + meta->b_z * cos(meta->alpha);
 }
