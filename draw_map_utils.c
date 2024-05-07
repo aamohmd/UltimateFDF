@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 13:07:35 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 10:40:39 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:29:35 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	isometric(t_point *point, t_meta *meta)
 	point->z *= meta->zoom;
 	previous_x = point->x;
 	previous_y = point->y;
-	point->x = (previous_x - previous_y) * cos(0.6);
-	point->y = ((previous_x + previous_y) * sin(0.6)) - point->z;
+	point->x = (previous_x - previous_y) * cos(0.523598776);
+	point->y = ((previous_x + previous_y) * sin(0.523598776)) - point->z;
 	point->x += (WINX / 2);
 	point->y += (WINY / 2);
 }

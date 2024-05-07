@@ -6,15 +6,30 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 08:05:26 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/02 15:43:17 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:29:56 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf_bonus.h"
 
+void	free_map(t_map map)
+{
+	int	y;
+
+	y = 0;
+	while (y < map.num_rows)
+	{
+		free(map.points[y]);
+		y++;
+	}
+	free(map.points);
+}
+
 int	close_window(t_meta *meta)
 {
+	mlx_destroy_image(meta->mlx, meta->data.img);
 	mlx_destroy_window(meta->mlx, meta->win);
+	free_map(meta->map);
 	exit(0);
 	return (0);
 }

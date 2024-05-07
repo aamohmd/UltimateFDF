@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:56:14 by aamohame          #+#    #+#             */
-/*   Updated: 2024/05/02 16:13:51 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:57:19 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	check_map(t_map *map, char *filename)
 	{
 		read_map(map);
 		if (ft_strncmp(map->line, "\n", 1) == 0 && map->y == 0)
-			terminate("empty file");
+			terminate("No data found.");
 		free(map->line);
 		ft_strsdel(&map->parts);
 		map->y++;

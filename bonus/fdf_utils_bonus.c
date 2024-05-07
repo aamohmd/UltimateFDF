@@ -6,7 +6,7 @@
 /*   By: aamohame <aamohame@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:29:34 by aamohame          #+#    #+#             */
-/*   Updated: 2024/04/27 19:44:34 by aamohame         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:48:31 by aamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	get_perfect_zoom(t_meta *meta)
 		meta->zoom = 15;
 	else if (surface >= 25000 && surface < 40000)
 		meta->zoom = 3;
-	else if (surface == 250000 && surface == 129213)
-		meta->zoom = 2;
+	else if (surface == 250000 || surface == 129213)
+		meta->zoom = 1;
 	else if (surface >= 40000 && surface < 100000)
 		meta->zoom = 4;
 	else if (surface == 70950)
